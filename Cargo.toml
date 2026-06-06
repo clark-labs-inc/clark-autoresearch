@@ -3,10 +3,10 @@ name = "clark-autoresearch"
 version = "0.1.0"
 description = "Experiment graph and frontier-selection primitives for autonomous research loops."
 readme = "README.md"
-edition.workspace = true
-license.workspace = true
-authors.workspace = true
-repository.workspace = true
+edition = "2024"
+license = "Apache-2.0"
+authors = ["Clark Labs Inc."]
+repository = "https://github.com/clark-labs-inc/clark-autoresearch"
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
