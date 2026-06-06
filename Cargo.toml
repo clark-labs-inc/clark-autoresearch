@@ -1,0 +1,15 @@
+[package]
+name = "clark-autoresearch"
+version = "0.1.0"
+description = "Experiment graph and frontier-selection primitives for autonomous research loops."
+readme = "README.md"
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha1 = "0.10"
+thiserror = "2"
