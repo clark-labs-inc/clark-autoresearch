@@ -7,9 +7,36 @@ edition = "2024"
 license = "Apache-2.0"
 authors = ["Clark Labs Inc."]
 repository = "https://github.com/clark-labs-inc/clark-autoresearch"
+keywords = ["agents", "research", "optimization", "experiments", "frontier"]
+categories = ["command-line-utilities", "science", "development-tools"]
+exclude = ["/target", "/.autoresearch"]
 
 [dependencies]
+anyhow = "1.0"
+clap = { version = "4.5", features = ["derive"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 sha1 = "0.10"
 thiserror = "2"
+# Optional semantic-similarity backend. When the `similarity` feature is
+# enabled, clark-hash provides stateless sparse-JL quantized sketches for the
+# research ledger and the semantic candidate cache. The default (featureless)
+# build stays dependency-light and does not pull clark-hash.
+clark-hash = { version = "0.1", default-features = false, features = ["serde"], optional = true }
+
+[features]
+similarity = ["dep:clark-hash"]
+
+[[bin]]
+name = "clark-autoresearch"
+path = "src/main.rs"
+
+[[example]]
+name = "simple_loop"
+
+[[example]]
+name = "optimize_loop"
+
+[[example]]
+name = "semantic_ledger"
+required-features = ["similarity"]

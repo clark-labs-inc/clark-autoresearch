@@ -285,6 +285,48 @@ impl ExperimentGraph {
         })
     }
 
+    /// Judge whether a node improves its parent under an [`AcceptanceCriterion`],
+    /// returning an explainable verdict (accepted + reason).
+    ///
+    /// This is the enforced, reason-carrying successor to
+    /// [`ExperimentGraph::outcome_improves_parent`]. A node with no recorded
+    /// score, or no parent, is accepted by default (there is nothing to
+    /// improve on); otherwise the criterion compares the candidate's score
+    /// against its parent's under the metric's direction.
+    pub fn acceptance_verdict(
+        &self,
+        id: &str,
+        metric: &Metric,
+        criterion: crate::acceptance::AcceptanceCriterion,
+    ) -> Result<crate::acceptance::AcceptanceVerdict, GraphError> {
+        let node = self.node(id)?;
+        let Some(candidate_score) = node.score else {
+            return Ok(crate::acceptance::AcceptanceVerdict {
+                accepted: true,
+                reason: "no candidate score recorded".to_string(),
+            });
+        };
+        let Some(parent_id) = &node.parent else {
+            return Ok(criterion.should_accept(candidate_score, None, metric));
+        };
+        let parent_score = self.node(parent_id)?.score;
+        Ok(criterion.should_accept(candidate_score, parent_score, metric))
+    }
+
+    /// Every node that has been evaluated, regardless of its current status.
+    ///
+    /// Unlike [`ExperimentGraph::frontier_nodes`], this includes discarded,
+    /// failed, and evaluated-but-uncommitted nodes. The Pareto frontier
+    /// (mirrors GEPA's candidate pool) is computed over this set so that a
+    /// candidate which wins a single example or objective stays selectable as
+    /// a parent even after it is discarded for a lower aggregate score.
+    pub fn evaluated_pool(&self) -> Vec<&ExperimentNode> {
+        self.nodes
+            .values()
+            .filter(|node| node.outcome.is_some())
+            .collect()
+    }
+
     pub fn frontier_nodes(&self) -> Vec<&ExperimentNode> {
         let mut out = Vec::new();
         for node in self.nodes.values() {

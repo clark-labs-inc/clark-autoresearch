@@ -1,0 +1,6 @@
+/target/
+/.autoresearch/state.json
+/.autoresearch/worktrees/
+/.DS_Store
+*.log
+*.tmp
