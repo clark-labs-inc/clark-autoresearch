@@ -10,4 +10,4 @@ permissions:
 
 jobs:
   smoke:
-    uses: clark-labs-inc/.github/.github/workflows/rust-research.yml@c4a19dc12d2226a1c6abcc44379d888b5d785cea
+    uses: clark-labs-inc/.github/.github/workflows/rust-research.yml@6c63c61d3ff6c292eefe49fda73bcddd3eac8d36
