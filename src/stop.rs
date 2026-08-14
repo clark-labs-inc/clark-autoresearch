@@ -102,12 +102,12 @@ mod tests {
     #[test]
     fn file_stopper_fires_when_file_exists() {
         let path = std::env::temp_dir().join("clark_autoresearch_stop_test_marker");
-        let _ = std::fs::remove_file(&path);
+        drop(std::fs::remove_file(&path));
         let stop = StopCondition::FileStopper { path: path.clone() };
         assert!(!stop.should_stop(&LoopSnapshot::default()));
         std::fs::write(&path, b"stop").unwrap();
         assert!(stop.should_stop(&LoopSnapshot::default()));
-        let _ = std::fs::remove_file(&path);
+        drop(std::fs::remove_file(&path));
     }
 
     #[test]
