@@ -1,0 +1,5 @@
+[
+  {"question": "What is 7 + 5?", "expected": "12"},
+  {"question": "What is 6 * 8?", "expected": "48"},
+  {"question": "What is 23 - 9?", "expected": "14"}
+]

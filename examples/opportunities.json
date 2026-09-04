@@ -1,0 +1,30 @@
+{
+  "bias": {
+    "explore_weight": 0.15,
+    "exploit_weight": 0.35,
+    "validation_weight": 0.45,
+    "require_in_scope": true
+  },
+  "opportunities": [
+    {
+      "node_id": "target:docs-api",
+      "surface": "target",
+      "priority": 0.4,
+      "novelty": 0.9,
+      "confidence": 0.5,
+      "impact": 0.3,
+      "in_scope": true,
+      "requires_validation": false
+    },
+    {
+      "node_id": "hypothesis:auth-cache",
+      "surface": "hypothesis",
+      "priority": 0.8,
+      "novelty": 0.2,
+      "confidence": 0.7,
+      "impact": 0.9,
+      "in_scope": true,
+      "requires_validation": true
+    }
+  ]
+}

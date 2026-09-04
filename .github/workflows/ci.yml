@@ -1,0 +1,13 @@
+name: Research smoke
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    uses: clark-labs-inc/.github/.github/workflows/rust-research.yml@6c63c61d3ff6c292eefe49fda73bcddd3eac8d36

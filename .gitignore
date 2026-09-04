@@ -1,0 +1,20 @@
+/target/
+/.autoresearch/state.json
+/.autoresearch/worktrees/
+/.DS_Store
+*.log
+*.tmp
+
+# Local secrets — never commit
+.env
+.env.*
+
+# Agent-session state (local-only)
+.agent/
+.clark/
+
+# Build output (also matches the target symlink on some machines)
+target
+
+# Local-only example harness (reads the private ../clark repo)
+examples/clark-prompt/
